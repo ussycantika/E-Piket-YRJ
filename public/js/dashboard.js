@@ -160,26 +160,26 @@ function renderDashboardHarian(data) {
                     const posBadgeText = isReported ? 'Sudah Lapor' : 'Belum Lapor';
 
                     return `
-                      <div class="pos-item ${isReported ? 'is-clickable' : ''}" onclick="${isReported ? `viewReportDetail(${p.laporan_terakhir.id})` : ''}">
-                        <div class="pos-info-block">
+                      <div class="pos-item pos-table-row ${isReported ? 'is-clickable' : ''}" onclick="${isReported ? `viewReportDetail(${p.laporan_terakhir.id})` : ''}">
+                        <div class="pos-col pos-col-name">
                           <div class="pos-name">${p.nama}</div>
-                          <div class="pos-subtext">
-                            ${isReported
-                              ? `<span class="time-badge">${formatTime(p.laporan_terakhir.waktu_submit)}</span> Petugas: <span class="officer-highlight">${p.laporan_terakhir.nama_petugas}</span>`
-                              : 'Belum ada laporan petugas'}
-                          </div>
                         </div>
-                        <div class="pos-badge-block">
+                        <div class="pos-col pos-col-info">
+                          ${isReported
+                            ? `<span class="time-tag">${formatTime(p.laporan_terakhir.waktu_submit)}</span> <span class="officer-name">${p.laporan_terakhir.nama_petugas}</span>`
+                            : '<span class="no-report">Belum ada laporan</span>'}
+                        </div>
+                        <div class="pos-action-group">
                           ${isReported ? `
-                            <button type="button" class="status-badge-btn status-complete">
-                              <span class="status-dot"></span>
-                              <span>Sudah Lapor</span>
-                              <span class="badge-arrow">›</span>
+                            <span class="status-badge status-complete">
+                              <span class="status-dot"></span>Sudah Lapor
+                            </span>
+                            <button type="button" class="btn-view-detail" onclick="event.stopPropagation(); viewReportDetail(${p.laporan_terakhir.id})">
+                              Lihat detail →
                             </button>
                           ` : `
                             <span class="status-badge status-pending">
-                              <span class="status-dot"></span>
-                              <span>Belum Lapor</span>
+                              <span class="status-dot"></span>Belum Lapor
                             </span>
                           `}
                         </div>
