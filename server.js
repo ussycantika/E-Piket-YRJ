@@ -23,12 +23,48 @@ app.use(session({
   }
 }));
 
+const fs = require('fs');
+
 // Disable cache for static assets to ensure instant updates
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '0');
   next();
+});
+
+// Serve index.html with pre-filled dynamic date values in server-side HTML response
+app.get(['/', '/index.html'], (req, res) => {
+  const indexPath = path.join(__dirname, 'public', 'index.html');
+  try {
+    let html = fs.readFileSync(indexPath, 'utf8');
+
+    const now = new Date();
+    const jakartaToday = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }));
+    const yyyy = jakartaToday.getFullYear();
+    const mm = String(jakartaToday.getMonth() + 1).padStart(2, '0');
+    const dd = String(jakartaToday.getDate()).padStart(2, '0');
+    const todayStr = `${yyyy}-${mm}-${dd}`;
+
+    const thirtyAgo = new Date(jakartaToday.getTime() - 30 * 24 * 60 * 60 * 1000);
+    const yyyy2 = thirtyAgo.getFullYear();
+    const mm2 = String(thirtyAgo.getMonth() + 1).padStart(2, '0');
+    const dd2 = String(thirtyAgo.getDate()).padStart(2, '0');
+    const thirtyDaysAgoStr = `${yyyy2}-${mm2}-${dd2}`;
+
+    html = html.replace('id="tanggalDashboard"', `id="tanggalDashboard" value="${todayStr}"`);
+    html = html.replace('id="eksporSampai"', `id="eksporSampai" value="${todayStr}"`);
+    html = html.replace('id="eksporDari"', `id="eksporDari" value="${thirtyDaysAgoStr}"`);
+    html = html.replace('id="analitikSampai"', `id="analitikSampai" value="${todayStr}"`);
+    html = html.replace('id="analitikDari"', `id="analitikDari" value="${thirtyDaysAgoStr}"`);
+    html = html.replace('id="tanggalPiket"', `id="tanggalPiket" value="${todayStr}"`);
+
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.send(html);
+  } catch (err) {
+    res.sendFile(indexPath);
+  }
 });
 
 // Static files
