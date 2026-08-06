@@ -793,63 +793,27 @@ select option {
   outline: none;
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  color: white;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-glow);
-}
-
-.btn-secondary {
-  background: var(--bg-glass);
-  color: var(--text-secondary);
-  border: 1px solid var(--border);
-}
-
-.btn-secondary:hover {
-  border-color: var(--border-active);
-  color: var(--text-primary);
-}
-
-.btn-back,
-.btn-next {
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--green-100);
-  padding: 0.65rem 1.2rem;
-  font-size: 1.25rem;
-  font-weight: 700;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all var(--duration) var(--ease);
-}
-
-.btn-back:hover,
-.btn-next:hover {
-  background: rgba(161, 217, 155, 0.12);
-  color: #EDF8E9;
-  border-color: rgba(161, 217, 155, 0.2);
-}
-
-.btn-submit {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--green-100);
+.btn-primary,
+.btn-submit,
+#btnToStep4 {
+  background: transparent !important;
+  border: 1px solid var(--border) !important;
+  color: var(--green-100) !important;
   padding: 0.75rem 1.75rem;
   font-size: 0.95rem;
   font-weight: 600;
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--duration) var(--ease);
+  box-shadow: none !important;
 }
 
-.btn-submit:hover {
-  background: rgba(161, 217, 155, 0.15);
-  border-color: var(--border-active);
-  color: #EDF8E9;
+.btn-primary:hover,
+.btn-submit:hover,
+#btnToStep4:hover {
+  background: rgba(161, 217, 155, 0.15) !important;
+  border-color: var(--border-active) !important;
+  color: #EDF8E9 !important;
   transform: translateY(-1px);
 }
 
