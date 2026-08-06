@@ -221,16 +221,16 @@
   border-color: #238B45;
 }
 
-/* Seamless card header bar blending perfectly with card container */
+/* Header bar: Seamless transparent header with subtle border divider, no solid green block */
 .kelompok-header-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.85rem 1.1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  color: #FFFFFF;
-  min-height: 50px;
+  background: transparent !important;
+  border-bottom: 1px solid var(--border) !important;
+  color: #FFFFFF !important;
+  min-height: 48px;
 }
 
 .kelompok-bar-title {
@@ -239,7 +239,7 @@
   text-transform: uppercase;
   letter-spacing: 0.03em;
   line-height: 1.35;
-  color: #FFFFFF;
+  color: #FFFFFF !important;
 }
 
 .kelompok-bar-badge {
