@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Form Laporan Piket Harian - E-Piket">
+  <title>Isi Laporan Piket | E-Piket</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header Navbar -->
+  <header class="app-header">
+    <a href="index.html" class="header-brand">
+      <img src="asset/logo-yrj.png" alt="Logo YRJ" class="header-logo">
+      <div class="header-title-wrap">
+        <span class="brand-title">E-Piket</span>
+        <span class="brand-subtitle">Yayasan Raudhatul Jannah Cilegon</span>
+      </div>
+    </a>
+  </header>
+
+  <div class="form-container">
+    <!-- Header -->
+    <header class="form-header">
+      <div class="header-info">
+        <h1>Monitoring Pembiasaan Harian</h1>
+        <p class="header-desc">Isi laporan piket dengan cepat dan mudah</p>
+      </div>
+    </header>
+
+    <!-- Progress bar -->
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-fill" style="width: 25%"></div>
+      </div>
+      <div class="progress-steps">
+        <span class="step active" data-step="1">Kelompok</span>
+        <span class="step" data-step="2">Pos</span>
+        <span class="step" data-step="3">Data Diri</span>
+        <span class="step" data-step="4">Checklist</span>
+      </div>
+    </div>
+
+    <!-- Step 1: Pilih Kelompok -->
+    <div class="form-step active" id="step-1">
+      <h2 class="step-title">Pilih Kelompok Piket</h2>
+      <div class="card-grid" id="kelompokGrid">
+        <!-- Dynamically loaded -->
+        <div class="loading-spinner">
+          <div class="spinner"></div>
+          <p>Memuat data...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Pilih Pos -->
+    <div class="form-step" id="step-2">
+      <h2 class="step-title">Pilih Pos Piket</h2>
+      <p class="step-subtitle" id="selectedKelompokName"></p>
+      <div class="card-grid" id="posGrid">
+        <!-- Dynamically loaded -->
+      </div>
+      <button class="btn btn-back" id="btnBackStep1" onclick="goToStep(1)">←</button>
+    </div>
+
+    <!-- Step 3: Data Diri -->
+    <div class="form-step" id="step-3">
+      <h2 class="step-title">Isi Data Petugas</h2>
+      <p class="step-subtitle" id="selectedPosName"></p>
+
+      <div class="form-group">
+        <label for="namaPetugas">Nama Petugas <span class="required">*</span></label>
+        <input type="text" id="namaPetugas" placeholder="Masukkan nama lengkap" autocomplete="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="tanggalPiket">Tanggal <span class="required">*</span></label>
+        <input type="date" id="tanggalPiket" required>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-back" onclick="goToStep(2)">←</button>
+        <button class="btn btn-next" id="btnToStep4" onclick="goToStep(4)">→</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Checklist -->
+    <div class="form-step" id="step-4">
+      <h2 class="step-title">Checklist Monitoring</h2>
+      <p class="step-subtitle" id="checklistPosName"></p>
+
+      <div class="checklist-container" id="checklistContainer">
+        <!-- Dynamically loaded -->
+      </div>
+
+      <div class="form-group">
+        <label for="catatanLain">Catatan Lain (Other)</label>
+        <textarea id="catatanLain" placeholder="Tulis catatan tambahan jika ada..." rows="3"></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-back" onclick="goToStep(3)">←</button>
+        <button class="btn btn-submit" id="btnSubmit" onclick="submitReport()">
+          <span class="btn-text">Submit Laporan</span>
+          <span class="btn-loading" style="display:none">
+            <div class="spinner-small"></div> Mengirim...
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Success State -->
+    <div class="form-step" id="step-success" style="display:none">
+      <div class="success-container">
+        <h2>Laporan Berhasil Dikirim!</h2>
+        <p>Terima kasih sudah mengisi laporan piket hari ini.</p>
+        <div class="success-actions">
+          <button class="btn btn-secondary" onclick="resetForm()">Isi Laporan Lagi</button>
+          <a href="index.html" class="btn btn-secondary">Kembali ke Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/form.js"></script>
+</body>
+</html>

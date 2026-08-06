@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard Supervisor - E-Piket Monitoring Pembiasaan Harian">
+  <title>Dashboard | E-Piket</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <img src="asset/logo-yrj.png" alt="Logo E-Piket" class="sidebar-logo">
+        <div>
+          <h2>E-Piket</h2>
+          <p class="sidebar-subtitle">Monitoring</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-tab="harian" id="navHarian" onclick="switchTab('harian')">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard Harian</span>
+        </button>
+        <button class="nav-item" data-tab="analitik" id="navAnalitik" onclick="switchTab('analitik')">
+          <span class="nav-icon">📈</span>
+          <span>Analitik</span>
+        </button>
+        <button class="nav-item" data-tab="ekspor" id="navEkspor" onclick="switchTab('ekspor')">
+          <span class="nav-icon">📥</span>
+          <span>Ekspor Excel</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <span class="user-avatar">👤</span>
+          <span class="user-name" id="userName">Supervisor</span>
+        </div>
+        <button class="btn-logout" id="btnLogout" onclick="handleLogout()">Logout</button>
+      </div>
+    </aside>
+
+    <!-- Mobile header -->
+    <header class="mobile-header">
+      <button class="hamburger" id="btnHamburger" onclick="toggleSidebar()">☰</button>
+      <h1>E-Piket Dashboard</h1>
+      <button class="btn-logout-mobile" id="btnLogoutMobile" onclick="handleLogout()">🚪</button>
+    </header>
+
+    <!-- Main content -->
+    <main class="main-content">
+      <!-- TAB: DASHBOARD HARIAN -->
+      <section class="tab-content active" id="tab-harian">
+        <div class="tab-header">
+          <h1>Dashboard Harian</h1>
+          <div class="date-picker-wrap">
+            <input type="date" id="tanggalDashboard" class="date-picker" onchange="loadDashboardHarian()">
+            <button class="btn btn-sm" onclick="setToday()">Hari ini</button>
+          </div>
+        </div>
+
+        <!-- Summary cards -->
+        <div class="summary-cards" id="summaryCards">
+          <!-- Dynamically loaded -->
+        </div>
+
+        <!-- Kelompok detail -->
+        <div class="kelompok-grid" id="kelompokGrid">
+          <!-- Dynamically loaded -->
+        </div>
+      </section>
+
+      <!-- TAB: ANALITIK -->
+      <section class="tab-content" id="tab-analitik">
+        <div class="tab-header">
+          <h1>Analitik & Pivot Laporan</h1>
+          <div class="date-range-wrap">
+            <div class="date-group">
+              <label>Dari</label>
+              <input type="date" id="analitikDari" class="date-picker">
+            </div>
+            <div class="date-group">
+              <label>Sampai</label>
+              <input type="date" id="analitikSampai" class="date-picker">
+            </div>
+            <button class="btn btn-primary btn-sm" id="btnLoadAnalitik" onclick="loadAnalitik()">Terapkan</button>
+          </div>
+        </div>
+
+        <div class="analytics-grid">
+          <!-- Tren Chart -->
+          <div class="analytics-card card-full">
+            <h3>📈 Tren Laporan Harian</h3>
+            <div class="chart-container">
+              <canvas id="chartTren"></canvas>
+            </div>
+          </div>
+
+          <!-- Kepatuhan per Pos -->
+          <div class="analytics-card">
+            <h3>🎯 Kepatuhan per Pos</h3>
+            <div class="chart-container">
+              <canvas id="chartKepatuhan"></canvas>
+            </div>
+          </div>
+
+          <!-- Checklist sering unchecked -->
+          <div class="analytics-card">
+            <h3>⚠️ Checklist Sering Tidak Tercentang</h3>
+            <div class="unchecked-list" id="uncheckedList">
+              <!-- Dynamically loaded -->
+            </div>
+          </div>
+
+          <!-- Rekap Petugas -->
+          <div class="analytics-card card-full">
+            <h3>👥 Rekap per Petugas</h3>
+            <div class="table-wrap">
+              <table class="data-table" id="tablePetugas">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama Petugas</th>
+                    <th>Total Laporan</th>
+                    <th>Hari Aktif</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: EKSPOR -->
+      <section class="tab-content" id="tab-ekspor">
+        <div class="tab-header">
+          <h1>Ekspor ke Excel</h1>
+        </div>
+
+        <div class="export-card">
+          <div class="export-icon">📥</div>
+          <h2>Download Laporan Excel</h2>
+          <p>File .xlsx berisi 2 sheet: <strong>Rekap</strong> (ringkasan) dan <strong>Detail</strong> (per checklist item)</p>
+
+          <div class="export-filters">
+            <div class="form-group">
+              <label for="eksporDari">Tanggal Mulai</label>
+              <input type="date" id="eksporDari" class="date-picker">
+            </div>
+            <div class="form-group">
+              <label for="eksporSampai">Tanggal Akhir</label>
+              <input type="date" id="eksporSampai" class="date-picker">
+            </div>
+            <div class="form-group">
+              <label for="eksporKelompok">Kelompok (opsional)</label>
+              <select id="eksporKelompok">
+                <option value="">Semua Kelompok</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="eksporPos">Pos (opsional)</label>
+              <select id="eksporPos">
+                <option value="">Semua Pos</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="btn btn-submit btn-full" id="btnExport" onclick="downloadExcel()">
+            <span class="btn-text">📥 Download Excel</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Detail Modal -->
+      <div class="modal-overlay" id="detailModal" style="display:none">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 id="modalTitle">Detail Laporan</h2>
+            <button class="modal-close" id="btnCloseModal" onclick="closeModal()">×</button>
+          </div>
+          <div class="modal-body" id="modalBody">
+            <!-- Dynamically loaded -->
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login Supervisor - E-Piket">
+  <title>Login Supervisor | E-Piket</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header Navbar -->
+  <header class="app-header">
+    <a href="index.html" class="header-brand">
+      <img src="asset/logo-yrj.png" alt="Logo YRJ" class="header-logo">
+      <div class="header-title-wrap">
+        <span class="brand-title">E-Piket</span>
+        <span class="brand-subtitle">Yayasan Raudhatul Jannah Cilegon</span>
+      </div>
+    </a>
+  </header>
+
+  <div class="login-container">
+    <div class="bg-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+    </div>
+
+    <div class="login-card">
+      <div class="login-header">
+        <span class="login-icon">🔐</span>
+        <h1>Login Supervisor</h1>
+        <p>Masuk untuk mengakses dashboard monitoring</p>
+      </div>
+
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Masukkan username" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-wrap">
+            <input type="password" id="password" placeholder="Masukkan password" autocomplete="current-password" required>
+            <button type="button" class="toggle-password" onclick="togglePassword()" id="btnTogglePassword">👁️</button>
+          </div>
+        </div>
+        <div id="loginError" class="error-message" style="display:none"></div>
+        <button type="submit" class="btn btn-submit btn-full" id="btnLogin">
+          <span class="btn-text">Masuk</span>
+          <span class="btn-loading" style="display:none">
+            <div class="spinner-small"></div> Memproses...
+          </span>
+        </button>
+      </form>
+
+      <a href="index.html" class="back-to-home">Kembali ke Home</a>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>
