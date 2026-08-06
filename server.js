@@ -23,6 +23,14 @@ app.use(session({
   }
 }));
 
+// Disable cache for static assets to ensure instant updates
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  next();
+});
+
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
 

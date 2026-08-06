@@ -215,9 +215,23 @@
     </div>
   </div>
 
-  <!-- Scripts -->
-  <script src="js/form.js"></script>
-  <script src="js/dashboard.js"></script>
-  <script src="js/app.js"></script>
+  <!-- Scripts with cache busters -->
+  <script src="js/form.js?v=2.5"></script>
+  <script src="js/dashboard.js?v=2.5"></script>
+  <script src="js/app.js?v=2.5"></script>
+  <script>
+    (function instantDateInit() {
+      const today = new Date().toISOString().split('T')[0];
+      const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+      ['tanggalDashboard', 'sampaiEl', 'eksporSampai'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && !el.value) el.value = today;
+      });
+      ['analitikDari', 'eksporDari'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && !el.value) el.value = thirtyDaysAgo;
+      });
+    })();
+  </script>
 </body>
 </html>
