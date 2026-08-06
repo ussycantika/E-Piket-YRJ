@@ -478,22 +478,26 @@ body.sidebar-collapsed .main-content {
 
 .date-picker-wrap {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .date-picker-wrap .btn-sm {
   background: var(--bg-glass);
   border: 1px solid var(--border);
   color: var(--text-primary);
-  padding: 0.65rem 1.25rem;
-  font-size: 0.95rem;
+  padding: 0.65rem 1.1rem;
+  font-size: 0.88rem;
   font-weight: 600;
   white-space: nowrap;
   display: flex;
   align-items: center;
+  justify-content: center;
   border-radius: var(--radius-sm);
   transition: all var(--duration) var(--ease);
+  flex-shrink: 0;
 }
 
 .date-picker-wrap .btn-sm:hover,
@@ -505,18 +509,19 @@ body.sidebar-collapsed .main-content {
 
 input[type="date"],
 .date-picker {
-  min-width: 160px;
+  min-width: 120px;
+  flex: 1 1 120px;
   width: auto;
   max-width: 100%;
-  padding: 0.65rem 1.25rem 0.65rem 1rem !important;
+  padding: 0.65rem 1rem !important;
   text-align: left !important;
   direction: ltr !important;
   box-sizing: border-box !important;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  gap: 0.75rem !important;
+  gap: 0.5rem !important;
 }
 
 /* Chrome / Safari / Edge Mobile date text alignment fix with spacious right padding */
@@ -1407,7 +1412,7 @@ input[type="date"]::-webkit-date-and-time-value,
 /* ---------- KPI Summary Metric Cards ---------- */
 .kpi-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.25rem;
   margin-bottom: 1.75rem;
 }
