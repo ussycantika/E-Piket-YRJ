@@ -4,14 +4,14 @@
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  let hash = window.location.hash.replace('#', '') || 'form';
+  let hash = window.location.hash.replace('#', '') || 'dashboard';
   if (hash === 'harian' || hash === 'analitik') hash = 'dashboard';
   switchTab(hash);
 });
 
 function switchTab(tabName) {
   const validTabs = ['form', 'dashboard'];
-  let currentTab = validTabs.includes(tabName) ? tabName : 'form';
+  let currentTab = validTabs.includes(tabName) ? tabName : 'dashboard';
 
   validTabs.forEach(t => {
     const navBtn = document.getElementById(`nav-${t}`);

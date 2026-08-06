@@ -25,10 +25,10 @@
       </div>
 
       <nav class="navbar-links">
-        <button class="nav-link" id="nav-dashboard" onclick="switchTab('dashboard')">
+        <button class="nav-link active" id="nav-dashboard" onclick="switchTab('dashboard')">
           <span>Dashboard</span>
         </button>
-        <button class="nav-link active" id="nav-form" onclick="switchTab('form')">
+        <button class="nav-link" id="nav-form" onclick="switchTab('form')">
           <span>Form Piket</span>
         </button>
       </nav>
@@ -58,10 +58,10 @@
       <button class="mobile-sidebar-close" onclick="closeMobileSidebar()" aria-label="Tutup Menu">✕</button>
     </div>
     <div class="mobile-sidebar-nav">
-      <button class="mobile-nav-link" id="mobile-nav-dashboard" onclick="switchTab('dashboard'); closeMobileSidebar();">
+      <button class="mobile-nav-link active" id="mobile-nav-dashboard" onclick="switchTab('dashboard'); closeMobileSidebar();">
         Dashboard
       </button>
-      <button class="mobile-nav-link active" id="mobile-nav-form" onclick="switchTab('form'); closeMobileSidebar();">
+      <button class="mobile-nav-link" id="mobile-nav-form" onclick="switchTab('form'); closeMobileSidebar();">
         Form Piket
       </button>
     </div>
@@ -70,7 +70,7 @@
   <!-- Main Content Container -->
   <main class="app-main-content">
     <!-- TAB 1: FORM PENUGASAN / LAPORAN PIKET -->
-    <section class="tab-content active" id="tab-form">
+    <section class="tab-content" id="tab-form" style="display:none">
       <div class="form-container" style="padding-top:0; min-height:auto">
         <header class="form-header">
           <div class="form-nav-arrows" id="formNavArrows" style="display:none">
@@ -160,7 +160,7 @@
     </section>
 
     <!-- TAB 2: DASHBOARD (UNIFIED WITH ANALYTICS & PIVOT) -->
-    <section class="tab-content" id="tab-dashboard" style="display:none">
+    <section class="tab-content active" id="tab-dashboard" style="display:block">
       <div class="tab-header">
         <h1>Dashboard</h1>
         <div class="date-picker-wrap">
