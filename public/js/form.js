@@ -145,8 +145,7 @@ function goToStep(step) {
     backBtn.style.display = step > 1 ? 'inline-flex' : 'none';
   }
   if (nextBtn) {
-    // Show forward arrow only on step 3 (to go to checklist)
-    nextBtn.style.display = step === 3 ? 'inline-flex' : 'none';
+    nextBtn.style.display = 'none';
   }
 
   // Update progress
