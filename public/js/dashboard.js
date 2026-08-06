@@ -160,7 +160,7 @@ function renderDashboardHarian(data) {
                     const posBadgeText = isReported ? 'Sudah Lapor' : 'Belum Lapor';
 
                     return `
-                      <div class="pos-item" onclick="${isReported ? `viewReportDetail(${p.laporan_terakhir.id})` : ''}">
+                      <div class="pos-item">
                         <div class="pos-info">
                           <div>
                             <div class="pos-name">${p.nama}</div>
@@ -172,10 +172,29 @@ function renderDashboardHarian(data) {
                           </div>
                         </div>
                         <div class="pos-action-group">
-                          <span class="status-badge ${posBadgeClass}">
-                            ${posBadgeText}
-                          </span>
-                          ${isReported ? '<span class="pos-action">Lihat detail</span>' : ''}
+                          ${isReported ? `
+                            <button type="button" class="pos-dual-button btn-complete" onclick="viewReportDetail(${p.laporan_terakhir.id})" title="Lihat Detail Laporan">
+                              <span class="btn-seg-status">
+                                <span class="status-dot"></span>Sudah Lapor
+                              </span>
+                              <span class="btn-seg-divider"></span>
+                              <span class="btn-seg-action">
+                                Lihat Detail
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                              </span>
+                            </button>
+                          ` : `
+                            <button type="button" class="pos-dual-button btn-pending" onclick="switchTab('form')" title="Isi Laporan Piket">
+                              <span class="btn-seg-status">
+                                <span class="status-dot"></span>Belum Lapor
+                              </span>
+                              <span class="btn-seg-divider"></span>
+                              <span class="btn-seg-action">
+                                Isi Laporan
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                              </span>
+                            </button>
+                          `}
                         </div>
                       </div>
                     `;

@@ -288,27 +288,109 @@
 
 .pos-action-group {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 0.35rem;
+  align-items: center;
+  justify-content: flex-end;
   flex-shrink: 0;
 }
 
-.pos-action-group .status-badge {
+/* ---------- Combined Dual-Segment Action Buttons ---------- */
+.pos-dual-button {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
   white-space: nowrap;
+  transition: all 0.2s var(--ease);
+  overflow: hidden;
+  border: 1px solid transparent;
+  padding: 0;
+  background: transparent;
+  user-select: none;
 }
 
-.pos-action {
-  font-size: 0.85rem;
-  color: #EDF8E9 !important;
+/* Complete State: Green Dual Button */
+.btn-complete {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(52, 211, 153, 0.35);
+  color: #34D399;
+}
+
+.btn-complete:hover {
+  background: #238B45;
+  color: #FFFFFF;
+  border-color: #34D399;
+  box-shadow: 0 2px 10px rgba(35, 139, 69, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Pending State: Red Dual Button */
+.btn-pending {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(248, 113, 113, 0.3);
+  color: #F87171;
+}
+
+.btn-pending:hover {
+  background: #C53030;
+  color: #FFFFFF;
+  border-color: #F87171;
+  box-shadow: 0 2px 10px rgba(229, 62, 62, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-seg-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
   font-weight: 700;
-  white-space: nowrap;
-  transition: all var(--duration) var(--ease);
 }
 
-.pos-item:hover .pos-action {
-  color: #ffffff !important;
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.btn-complete .status-dot {
+  background: #34D399;
+  box-shadow: 0 0 6px rgba(52, 211, 153, 0.8);
+}
+
+.btn-pending .status-dot {
+  background: #F87171;
+  box-shadow: 0 0 6px rgba(248, 113, 113, 0.8);
+}
+
+.btn-complete:hover .status-dot,
+.btn-pending:hover .status-dot {
+  background: #FFFFFF;
+  box-shadow: none;
+}
+
+.btn-seg-divider {
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.btn-seg-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.65rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.pos-dual-button:hover .btn-seg-action {
+  opacity: 1;
 }
 
 /* ---------- Mobile Header ---------- */
