@@ -31,8 +31,12 @@ app.use('/api/auth', authRoutes);
 app.use('/api/piket', piketRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`\n🏫 E-Piket Server (Supabase Connected) berjalan di http://localhost:${PORT}`);
-  console.log(`📱 App E-Piket Unified: http://localhost:${PORT}/\n`);
-});
+// Start server (only if run directly)
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`\n🏫 E-Piket Server (Supabase Connected) berjalan di http://localhost:${PORT}`);
+    console.log(`📱 App E-Piket Unified: http://localhost:${PORT}/\n`);
+  });
+}
+
+module.exports = app;
