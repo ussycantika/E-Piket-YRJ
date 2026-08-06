@@ -210,26 +210,25 @@
 }
 
 .kelompok-section {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: #0C241B;
+  border: 1px solid #184D34;
   border-radius: var(--radius-md);
   overflow: hidden;
   transition: all var(--duration) var(--ease);
 }
 
 .kelompok-section:hover {
-  border-color: var(--border-active);
+  border-color: #238B45;
 }
 
-/* Sleek emerald glass header bar matching Gambar 2 style */
+/* Header bar with solid dark green background and white text */
 .kelompok-header-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1.1rem;
-  background: rgba(16, 185, 129, 0.12);
-  border-bottom: 1px solid rgba(52, 211, 153, 0.25);
-  color: #34D399;
+  background: #144B2A;
+  color: #FFFFFF;
   min-height: 50px;
 }
 
@@ -239,7 +238,7 @@
   text-transform: uppercase;
   letter-spacing: 0.02em;
   line-height: 1.35;
-  color: #34D399;
+  color: #FFFFFF;
 }
 
 .kelompok-bar-badge {
