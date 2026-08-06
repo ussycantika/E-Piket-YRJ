@@ -556,7 +556,7 @@ input, textarea, select, button {
 .step-title {
   font-size: 1.65rem;
   font-weight: 800;
-  color: #EDF8E9;
+  color: #0F172A;
   margin-bottom: 0.5rem;
 }
 
@@ -604,7 +604,7 @@ input, textarea, select, button {
 .select-card h3 {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #EDF8E9;
+  color: #0F172A;
   margin-bottom: 0.35rem;
 }
 
@@ -665,7 +665,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   left: 0.95rem;
   top: 50%;
   transform: translateY(-50%);
-  filter: invert(0.8);
+  filter: opacity(0.7);
   cursor: pointer;
   width: 20px;
   height: 20px;
