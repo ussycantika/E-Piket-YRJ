@@ -173,19 +173,15 @@ function renderDashboardHarian(data) {
                         </div>
                         <div class="pos-action-group">
                           ${isReported ? `
-                            <span class="status-badge status-complete">
-                              <span class="status-dot"></span>Sudah Lapor
-                            </span>
-                            <button type="button" class="btn-view-detail">
-                              <span>Lihat detail</span>
-                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                              </svg>
+                            <button type="button" class="status-badge-btn status-complete">
+                              <span class="status-dot"></span>
+                              <span>Sudah Lapor</span>
+                              <span class="badge-arrow">›</span>
                             </button>
                           ` : `
                             <span class="status-badge status-pending">
-                              <span class="status-dot"></span>Belum Lapor
+                              <span class="status-dot"></span>
+                              <span>Belum Lapor</span>
                             </span>
                           `}
                         </div>
