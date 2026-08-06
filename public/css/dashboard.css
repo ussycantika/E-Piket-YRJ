@@ -198,17 +198,15 @@
 }
 
 .kelompok-section {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: all var(--duration) var(--ease);
 }
 
 .kelompok-section:hover {
-  border-color: #CBD5E1;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: var(--border-active);
 }
 
 /* Google Form-style colored bar header */
