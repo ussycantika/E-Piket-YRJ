@@ -184,8 +184,8 @@
 .kelompok-grid-columns {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 
 .kelompok-column {
@@ -1098,6 +1098,11 @@ input[type="date"]::-webkit-date-and-time-value,
 
 /* Mobile View Layout Fix for Pos Cards (Point 3) */
 @media (max-width: 640px) {
+  .kelompok-grid-columns {
+    margin-bottom: 0.85rem !important;
+    gap: 0.85rem !important;
+  }
+
   .pos-item {
     flex-direction: column !important;
     align-items: stretch !important;
