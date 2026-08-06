@@ -257,15 +257,20 @@
   padding: 1rem 1.25rem;
 }
 
+/* ---------- 3-Column Table Grid Layout for Pos Items ---------- */
 .pos-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1.3fr 1.1fr auto;
   align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1.1rem;
+  gap: 1rem;
+  padding: 0.9rem 1.1rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   transition: all var(--duration) var(--ease);
+}
+
+.pos-item.is-clickable {
   cursor: pointer;
 }
 
@@ -274,23 +279,49 @@
   border-color: var(--border-active);
 }
 
+.pos-col {
+  min-width: 0;
+}
+
 .pos-name {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: var(--text-primary);
+  line-height: 1.3;
 }
 
-.pos-detail {
+.pos-col-info {
   font-size: 0.82rem;
   color: var(--text-muted);
-  margin-top: 0.2rem;
 }
 
-.pos-action-group {
+.time-tag {
+  display: inline-block;
+  font-weight: 700;
+  color: #34D399;
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  padding: 1px 7px;
+  border-radius: 4px;
+  margin-right: 4px;
+  font-size: 0.76rem;
+}
+
+.officer-name {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.no-report {
+  color: rgba(255, 255, 255, 0.35);
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
+.pos-col-status {
   display: flex;
-  align-items: center;
   justify-content: flex-end;
-  flex-shrink: 0;
+  align-items: center;
 }
 
 .status-badge {

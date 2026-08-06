@@ -160,18 +160,16 @@ function renderDashboardHarian(data) {
                     const posBadgeText = isReported ? 'Sudah Lapor' : 'Belum Lapor';
 
                     return `
-                      <div class="pos-item" onclick="${isReported ? `viewReportDetail(${p.laporan_terakhir.id})` : ''}">
-                        <div class="pos-info">
-                          <div>
-                            <div class="pos-name">${p.nama}</div>
-                            <div class="pos-detail">
-                              ${isReported
-                                ? `${formatTime(p.laporan_terakhir.waktu_submit)} Petugas: ${p.laporan_terakhir.nama_petugas}`
-                                : 'Belum ada laporan petugas'}
-                            </div>
-                          </div>
+                      <div class="pos-item pos-table-row ${isReported ? 'is-clickable' : ''}" onclick="${isReported ? `viewReportDetail(${p.laporan_terakhir.id})` : ''}">
+                        <div class="pos-col pos-col-name">
+                          <div class="pos-name">${p.nama}</div>
                         </div>
-                        <div class="pos-action-group">
+                        <div class="pos-col pos-col-info">
+                          ${isReported
+                            ? `<span class="time-tag">${formatTime(p.laporan_terakhir.waktu_submit)}</span> <span class="officer-name">${p.laporan_terakhir.nama_petugas}</span>`
+                            : '<span class="no-report">Belum ada laporan</span>'}
+                        </div>
+                        <div class="pos-col pos-col-status">
                           ${isReported ? `
                             <button type="button" class="status-badge-btn status-complete">
                               <span class="status-dot"></span>
