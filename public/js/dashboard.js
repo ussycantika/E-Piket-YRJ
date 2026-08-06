@@ -9,14 +9,14 @@ let kelompokDataCache = [];
 
 // ---- Initialize Default Date Inputs ----
 
-document.addEventListener('DOMContentLoaded', () => {
+function ensureDefaultDates() {
   const today = new Date().toISOString().split('T')[0];
-  const tglDash = document.getElementById('tanggalDashboard');
-  if (tglDash && !tglDash.value) tglDash.value = today;
-
   const thirtyDaysAgo = new Date();
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
   const dariStr = thirtyDaysAgo.toISOString().split('T')[0];
+
+  const tglDash = document.getElementById('tanggalDashboard');
+  if (tglDash && !tglDash.value) tglDash.value = today;
 
   const dariEl = document.getElementById('analitikDari');
   const sampaiEl = document.getElementById('analitikSampai');
@@ -27,11 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sampaiEl && !sampaiEl.value) sampaiEl.value = today;
   if (expDari && !expDari.value) expDari.value = dariStr;
   if (expSampai && !expSampai.value) expSampai.value = today;
+}
 
-  // Auto trigger dashboard load if page loaded with #dashboard hash
-  if (window.location.hash.includes('dashboard')) {
-    loadDashboardHarian();
-  }
+document.addEventListener('DOMContentLoaded', () => {
+  ensureDefaultDates();
+
+  // Always load dashboard data on DOM ready
+  loadDashboardHarian();
 });
 
 function setToday() {
@@ -43,12 +45,10 @@ function setToday() {
 // ---- Dashboard Harian ----
 
 async function loadDashboardHarian() {
+  ensureDefaultDates();
+
   const input = document.getElementById('tanggalDashboard');
   const today = new Date().toISOString().split('T')[0];
-
-  if (input && !input.value) {
-    input.value = today;
-  }
   const tanggal = (input && input.value) ? input.value : today;
 
   try {
