@@ -12,7 +12,7 @@ let kelompokDataCache = [];
 document.addEventListener('DOMContentLoaded', () => {
   const today = new Date().toISOString().split('T')[0];
   const tglDash = document.getElementById('tanggalDashboard');
-  if (tglDash) tglDash.value = today;
+  if (tglDash && !tglDash.value) tglDash.value = today;
 
   const thirtyDaysAgo = new Date();
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
@@ -27,6 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sampaiEl && !sampaiEl.value) sampaiEl.value = today;
   if (expDari && !expDari.value) expDari.value = dariStr;
   if (expSampai && !expSampai.value) expSampai.value = today;
+
+  // Auto trigger dashboard load if page loaded with #dashboard hash
+  if (window.location.hash.includes('dashboard')) {
+    loadDashboardHarian();
+  }
 });
 
 function setToday() {
@@ -48,51 +53,69 @@ async function loadDashboardHarian() {
 
   try {
     const res = await fetch(`/api/dashboard/harian?tanggal=${tanggal}`);
+    if (!res.ok) {
+      throw new Error(`HTTP error ${res.status}`);
+    }
     const data = await res.json();
     renderDashboardHarian(data);
   } catch (err) {
     console.error('Error loading dashboard:', err);
+    const gridEl = document.getElementById('kelompokGridDashboard') || document.getElementById('kelompokGrid');
+    if (gridEl) {
+      gridEl.innerHTML = `
+        <div class="empty-state-wrap">
+          <div class="empty-state-icon">⚠️</div>
+          <div class="empty-state-title">Gagal Memuat Data</div>
+          <div class="empty-state-desc">Terjadi kesalahan koneksi data (${err.message}).</div>
+          <button class="btn btn-primary btn-sm" onclick="loadDashboardHarian()">Coba Lagi</button>
+        </div>
+      `;
+    }
   }
 }
 
 function renderDashboardHarian(data) {
+  const gridEl = document.getElementById('kelompokGridDashboard') || document.getElementById('kelompokGrid');
+  const summaryEl = document.getElementById('summaryCards');
+
   if (!data || !data.kelompok || data.kelompok.length === 0) {
-    const gridEl = document.getElementById('kelompokGridDashboard') || document.getElementById('kelompokGrid');
-    gridEl.innerHTML = `
-      <div class="empty-state-wrap">
-        <div class="empty-state-icon">📋</div>
-        <div class="empty-state-title">Belum Ada Laporan Piket</div>
-        <div class="empty-state-desc">Belum ada pos piket yang mengirimkan laporan pada tanggal ini.</div>
-        <button class="btn btn-primary btn-sm" onclick="switchTab('form')">Isi Laporan Piket Sekarang</button>
-      </div>
-    `;
-    document.getElementById('summaryCards').innerHTML = '';
-    document.getElementById('piketTimelineTrack').innerHTML = '';
+    if (gridEl) {
+      gridEl.innerHTML = `
+        <div class="empty-state-wrap">
+          <div class="empty-state-icon">📋</div>
+          <div class="empty-state-title">Belum Ada Laporan Piket</div>
+          <div class="empty-state-desc">Belum ada pos piket yang mengirimkan laporan pada tanggal ini.</div>
+          <button class="btn btn-primary btn-sm" onclick="switchTab('form')">Isi Laporan Piket Sekarang</button>
+        </div>
+      `;
+    }
+    if (summaryEl) summaryEl.innerHTML = '';
     return;
   }
 
   // Calculate totals
   let totalPos = 0, totalDone = 0;
   data.kelompok.forEach(k => {
-    totalPos += k.total_pos;
-    totalDone += k.pos_selesai;
+    totalPos += k.total_pos || 0;
+    totalDone += k.pos_selesai || 0;
   });
   const totalPending = totalPos - totalDone;
-  const persen = totalPos > 0 ? Math.round((totalDone / totalPos) * 100) : 0;
 
   // 1. Render Big KPI Metric Summary Cards
-  document.getElementById('summaryCards').innerHTML = `
-    <div class="kpi-card card-accent-green">
-      <div class="kpi-val text-success">${totalDone}<span style="font-size:1.2rem; color:var(--text-muted)">/${totalPos}</span></div>
-      <div class="kpi-title">Pos Sudah Lapor</div>
-    </div>
-    <div class="kpi-card card-accent-red">
-      <div class="kpi-val" style="color:var(--danger)">${totalPending}</div>
-      <div class="kpi-title">Pos Belum Lapor</div>
-    </div>
-  `;
+  if (summaryEl) {
+    summaryEl.innerHTML = `
+      <div class="kpi-card card-accent-green">
+        <div class="kpi-val text-success">${totalDone}<span style="font-size:1.2rem; color:var(--text-muted)">/${totalPos}</span></div>
+        <div class="kpi-title">Pos Sudah Lapor</div>
+      </div>
+      <div class="kpi-card card-accent-red">
+        <div class="kpi-val" style="color:var(--danger)">${totalPending}</div>
+        <div class="kpi-title">Pos Belum Lapor</div>
+      </div>
+    `;
+  }
 
-  // 3. Render Kelompok Grid in 3 flex columns (Col 0: Piket Pagi & Shalat, Col 1: Piket Istirahat & Kepulangan, Col 2: Piket Makan Siang)
+  // 2. Render Kelompok Grid in 3 flex columns
   const columns = [[], [], []];
   data.kelompok.forEach((k, idx) => {
     if (idx === 0 || idx === 3) columns[0].push(k);
@@ -100,49 +123,51 @@ function renderDashboardHarian(data) {
     else columns[2].push(k);
   });
 
-  const gridEl = document.getElementById('kelompokGridDashboard') || document.getElementById('kelompokGrid');
-  gridEl.innerHTML = `
-    <div class="kelompok-grid-columns">
-      ${columns.map(colItems => `
-        <div class="kelompok-column">
-          ${colItems.map(k => `
-            <div class="kelompok-section">
-              <div class="kelompok-header-bar">
-                <span class="kelompok-bar-title">${k.nama} (${k.pos_selesai}/${k.total_pos})</span>
-              </div>
-              <div class="pos-list">
-                ${k.posList.map(p => {
-                  const posBadgeClass = p.sudah_lapor ? 'status-complete' : 'status-pending';
-                  const posBadgeText = p.sudah_lapor ? 'Sudah Lapor' : 'Belum Lapor';
+  if (gridEl) {
+    gridEl.innerHTML = `
+      <div class="kelompok-grid-columns">
+        ${columns.map(colItems => `
+          <div class="kelompok-column">
+            ${colItems.map(k => `
+              <div class="kelompok-section">
+                <div class="kelompok-header-bar">
+                  <span class="kelompok-bar-title">${k.nama} (${k.pos_selesai}/${k.total_pos})</span>
+                </div>
+                <div class="pos-list">
+                  ${k.posList.map(p => {
+                    const isReported = p.sudah_lapor && p.laporan_terakhir;
+                    const posBadgeClass = isReported ? 'status-complete' : 'status-pending';
+                    const posBadgeText = isReported ? 'Sudah Lapor' : 'Belum Lapor';
 
-                  return `
-                    <div class="pos-item" onclick="${p.sudah_lapor ? `viewReportDetail(${p.laporan_terakhir.id})` : ''}">
-                      <div class="pos-info">
-                        <div>
-                          <div class="pos-name">${p.nama}</div>
-                          <div class="pos-detail">
-                            ${p.sudah_lapor
-                              ? `${formatTime(p.laporan_terakhir.waktu_submit)} Petugas: ${p.laporan_terakhir.nama_petugas}`
-                              : 'Belum ada laporan petugas'}
+                    return `
+                      <div class="pos-item" onclick="${isReported ? `viewReportDetail(${p.laporan_terakhir.id})` : ''}">
+                        <div class="pos-info">
+                          <div>
+                            <div class="pos-name">${p.nama}</div>
+                            <div class="pos-detail">
+                              ${isReported
+                                ? `${formatTime(p.laporan_terakhir.waktu_submit)} Petugas: ${p.laporan_terakhir.nama_petugas}`
+                                : 'Belum ada laporan petugas'}
+                            </div>
                           </div>
                         </div>
+                        <div class="pos-action-group">
+                          <span class="status-badge ${posBadgeClass}">
+                            ${posBadgeText}
+                          </span>
+                          ${isReported ? '<span class="pos-action">Lihat detail</span>' : ''}
+                        </div>
                       </div>
-                      <div class="pos-action-group">
-                        <span class="status-badge ${posBadgeClass}">
-                          ${posBadgeText}
-                        </span>
-                        ${p.sudah_lapor ? '<span class="pos-action">Lihat detail</span>' : ''}
-                      </div>
-                    </div>
-                  `;
-                }).join('')}
+                    `;
+                  }).join('')}
+                </div>
               </div>
-            </div>
-          `).join('')}
-        </div>
-      `).join('')}
-    </div>
-  `;
+            `).join('')}
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
 }
 
 // ---- Report Detail Modal ----
