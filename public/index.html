@@ -8,9 +8,31 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=2.0">
-  <link rel="stylesheet" href="css/dashboard.css?v=2.0">
+  <link rel="stylesheet" href="css/style.css?v=3.0">
+  <link rel="stylesheet" href="css/dashboard.css?v=3.0">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script>
+    // Synchronous pre-paint date values initialization
+    (function syncDatesNow() {
+      const today = new Date().toISOString().split('T')[0];
+      const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+      const setValues = function() {
+        ['tanggalDashboard', 'sampaiEl', 'eksporSampai', 'tanggalPiket'].forEach(function(id) {
+          const el = document.getElementById(id);
+          if (el && !el.value) el.value = today;
+        });
+        ['analitikDari', 'eksporDari'].forEach(function(id) {
+          const el = document.getElementById(id);
+          if (el && !el.value) el.value = thirtyDaysAgo;
+        });
+      };
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setValues);
+      } else {
+        setValues();
+      }
+    })();
+  </script>
 </head>
 <body>
   <!-- Fixed Horizontal Top Navbar -->
@@ -169,11 +191,20 @@
         </div>
       </div>
 
-      <!-- Big KPI Metric Summary Cards -->
-      <div class="kpi-cards" id="summaryCards"></div>
+      <!-- Big KPI Metric Summary Cards (Prerendered Skeleton Shimmer) -->
+      <div class="kpi-cards" id="summaryCards">
+        <div class="kpi-card kpi-skeleton"></div>
+        <div class="kpi-card kpi-skeleton"></div>
+      </div>
 
-      <!-- Pos Status Grid -->
-      <div class="kelompok-grid" id="kelompokGridDashboard"></div>
+      <!-- Pos Status Grid (Prerendered Skeleton Shimmer) -->
+      <div class="kelompok-grid" id="kelompokGridDashboard">
+        <div class="skeleton-grid-placeholder">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+      </div>
 
       <!-- Ekspor Excel Section (inside Dashboard) -->
       <div class="export-section" style="margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 2rem">
