@@ -505,9 +505,10 @@ body.sidebar-collapsed .main-content {
 
 input[type="date"],
 .date-picker {
-  width: 100%;
+  min-width: 160px;
+  width: auto;
   max-width: 100%;
-  padding: 0.65rem 0.85rem !important;
+  padding: 0.65rem 1.25rem 0.65rem 1rem !important;
   text-align: left !important;
   direction: ltr !important;
   box-sizing: border-box !important;
@@ -515,14 +516,15 @@ input[type="date"],
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
+  gap: 0.75rem !important;
 }
 
-/* Chrome / Safari / Edge Mobile date text alignment fix */
+/* Chrome / Safari / Edge Mobile date text alignment fix with spacious right padding */
 input[type="date"]::-webkit-date-and-time-value,
 .date-picker::-webkit-date-and-time-value {
   text-align: left !important;
   margin: 0 !important;
-  padding: 0 !important;
+  padding-right: 0.6rem !important;
   flex: 1 !important;
 }
 
@@ -535,7 +537,7 @@ input[type="date"]::-webkit-date-and-time-value,
   height: 18px;
   opacity: 0.85;
   display: block !important;
-  margin: 0 0 0 auto !important;
+  margin: 0 0 0 0.5rem !important;
   flex-shrink: 0 !important;
 }
 
