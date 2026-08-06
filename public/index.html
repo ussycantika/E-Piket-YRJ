@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=12.0">
-  <link rel="stylesheet" href="css/dashboard.css?v=12.0">
+  <link rel="stylesheet" href="css/style.css?v=13.0">
+  <link rel="stylesheet" href="css/dashboard.css?v=13.0">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script>
     // Synchronous pre-paint date values initialization
@@ -193,16 +193,16 @@
         </div>
       </div>
 
-      <!-- KPI Summary Metric Cards (Tanggal, Pos Sudah Lapor, Pos Belum Lapor) -->
-      <div class="kpi-cards" id="summaryCards">
-        <!-- Card 1: Tanggal Piket -->
-        <div class="kpi-card card-accent-blue">
-          <div class="kpi-title" style="margin-bottom: 0.5rem; font-weight: 700; color: #6EE7B7;">📅 Tanggal Piket</div>
-          <div class="date-picker-wrap" style="width: 100%">
-            <input type="date" id="tanggalDashboard" class="date-picker" value="2026-08-06" onchange="loadDashboardHarian()">
-            <button class="btn btn-sm" onclick="setToday()">Hari ini</button>
-          </div>
+      <div class="tab-header">
+        <h1 style="font-size: 1.35rem;">Status Piket Harian</h1>
+        <div class="date-picker-wrap">
+          <input type="date" id="tanggalDashboard" class="date-picker" value="2026-08-06" onchange="loadDashboardHarian()">
+          <button class="btn btn-sm" onclick="setToday()">Hari ini</button>
         </div>
+      </div>
+
+      <!-- Big KPI Metric Summary Cards (2 Cards: Pos Sudah Lapor & Pos Belum Lapor) -->
+      <div class="kpi-cards" id="summaryCards">
         <div class="kpi-card kpi-skeleton"></div>
         <div class="kpi-card kpi-skeleton"></div>
       </div>

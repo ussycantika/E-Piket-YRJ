@@ -121,17 +121,9 @@ function renderDashboardHarian(data) {
   });
   const totalPending = totalPos - totalDone;
 
-  // 1. Render Big KPI Metric Summary Cards (Tanggal Piket, Pos Sudah Lapor, Pos Belum Lapor)
+  // 1. Render Big KPI Metric Summary Cards (Pos Sudah Lapor & Pos Belum Lapor)
   if (summaryEl) {
-    const curDateVal = document.getElementById('tanggalDashboard')?.value || new Date().toISOString().split('T')[0];
     summaryEl.innerHTML = `
-      <div class="kpi-card card-accent-blue">
-        <div class="kpi-title" style="margin-bottom: 0.5rem; font-weight: 700; color: #6EE7B7;">📅 Tanggal Piket</div>
-        <div class="date-picker-wrap" style="width: 100%">
-          <input type="date" id="tanggalDashboard" class="date-picker" value="${curDateVal}" onchange="loadDashboardHarian()">
-          <button class="btn btn-sm" onclick="setToday()">Hari ini</button>
-        </div>
-      </div>
       <div class="kpi-card card-accent-green">
         <div class="kpi-val text-success">${totalDone}<span style="font-size:1.2rem; color:var(--text-muted)">/${totalPos}</span></div>
         <div class="kpi-title">Pos Sudah Lapor</div>
