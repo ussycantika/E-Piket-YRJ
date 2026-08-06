@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=10.0">
-  <link rel="stylesheet" href="css/dashboard.css?v=10.0">
+  <link rel="stylesheet" href="css/style.css?v=11.0">
+  <link rel="stylesheet" href="css/dashboard.css?v=11.0">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script>
     // Synchronous pre-paint date values initialization
@@ -183,16 +183,26 @@
 
     <!-- TAB 2: DASHBOARD (UNIFIED WITH ANALYTICS & PIVOT) -->
     <section class="tab-content active" id="tab-dashboard" style="display:block">
-      <div class="tab-header">
-        <h1>Dashboard</h1>
-        <div class="date-picker-wrap">
-          <input type="date" id="tanggalDashboard" class="date-picker" value="2026-08-06" onchange="loadDashboardHarian()">
-          <button class="btn btn-sm" onclick="setToday()">Hari ini</button>
+      
+      <!-- Penjelasan Singkat Website (Dashboard Hero Banner) -->
+      <div class="dashboard-hero-banner">
+        <div class="hero-banner-content">
+          <div class="hero-badge">✨ Monitoring Piket Harian</div>
+          <h2>E-Piket Yayasan Raudhatul Jannah Cilegon</h2>
+          <p>Platform digital terpadu untuk pemantauan, pencatatan, dan rekapitulasi kegiatan piket harian petugas di seluruh unit sekolah & fasilitas yayasan.</p>
         </div>
       </div>
 
-      <!-- Big KPI Metric Summary Cards (Prerendered Skeleton Shimmer) -->
+      <!-- KPI Summary Metric Cards (Tanggal, Pos Sudah Lapor, Pos Belum Lapor) -->
       <div class="kpi-cards" id="summaryCards">
+        <!-- Card 1: Tanggal Piket -->
+        <div class="kpi-card card-accent-blue">
+          <div class="kpi-title" style="margin-bottom: 0.5rem; font-weight: 700; color: #6EE7B7;">📅 Tanggal Piket</div>
+          <div class="date-picker-wrap" style="width: 100%">
+            <input type="date" id="tanggalDashboard" class="date-picker" value="2026-08-06" onchange="loadDashboardHarian()">
+            <button class="btn btn-sm" onclick="setToday()">Hari ini</button>
+          </div>
+        </div>
         <div class="kpi-card kpi-skeleton"></div>
         <div class="kpi-card kpi-skeleton"></div>
       </div>
