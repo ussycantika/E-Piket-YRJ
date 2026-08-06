@@ -408,24 +408,28 @@ body.sidebar-collapsed .main-content {
 }
 
 .date-picker {
-  max-width: 180px;
+  width: 100%;
+  max-width: 100%;
   position: relative;
-  padding-left: 2.8rem !important;
-  padding-right: 1rem !important;
+  padding: 0.75rem 1rem 0.75rem 2.6rem !important;
   text-align: left !important;
   direction: ltr !important;
+  box-sizing: border-box !important;
 }
 
 .date-picker::-webkit-calendar-picker-indicator {
   position: absolute;
-  left: 0.95rem;
+  left: 0.75rem;
   top: 50%;
   transform: translateY(-50%);
-  filter: invert(0.8);
+  filter: invert(0.85);
   cursor: pointer;
   width: 20px;
   height: 20px;
+  opacity: 1 !important;
+  display: block !important;
   margin: 0 !important;
+  z-index: 2;
 }
 
 .date-range-wrap {
@@ -718,9 +722,11 @@ body.sidebar-collapsed .main-content {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 2.5rem;
+  padding: 2rem 1.5rem;
   max-width: 100%;
   text-align: left;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .export-date-row {
@@ -735,8 +741,8 @@ body.sidebar-collapsed .main-content {
 }
 
 .export-icon {
-  font-size: 4rem;
-  margin-bottom: 1rem;
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
 }
 
 .export-card h2 {
@@ -748,7 +754,7 @@ body.sidebar-collapsed .main-content {
 .export-card > p {
   color: var(--text-secondary);
   font-size: 0.9rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .export-filters {
@@ -917,6 +923,21 @@ body.sidebar-collapsed .main-content {
 @media (max-width: 600px) {
   .summary-cards {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .export-card {
+    padding: 1.25rem 0.85rem !important;
+  }
+
+  .export-filters,
+  .export-date-row {
+    grid-template-columns: 1fr !important;
+    gap: 0.85rem;
+  }
+
+  .date-picker {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .modal-content {

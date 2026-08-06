@@ -569,7 +569,7 @@ input, textarea, select, button {
 /* ---------- Card Grid (Kelompok & Pos Selector) ---------- */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.25rem;
   margin-bottom: 1.5rem;
 }
@@ -1260,6 +1260,17 @@ select option {
 
   .app-main-content {
     padding-top: 6rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.85rem;
+  }
+
+  .select-card {
+    width: 100% !important;
+    padding: 1.15rem 1rem !important;
+    box-sizing: border-box !important;
   }
 }
 
