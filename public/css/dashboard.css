@@ -503,29 +503,40 @@ body.sidebar-collapsed .main-content {
   background: rgba(161, 217, 155, 0.12);
 }
 
+input[type="date"],
 .date-picker {
   width: 100%;
   max-width: 100%;
-  position: relative;
-  padding: 0.75rem 1rem 0.75rem 2.6rem !important;
+  padding: 0.65rem 0.85rem !important;
   text-align: left !important;
   direction: ltr !important;
   box-sizing: border-box !important;
+  font-size: 0.92rem;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+/* Chrome / Safari / Edge Mobile date text alignment fix */
+input[type="date"]::-webkit-date-and-time-value,
+.date-picker::-webkit-date-and-time-value {
+  text-align: left !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: 1 !important;
 }
 
 .date-picker::-webkit-calendar-picker-indicator {
-  position: absolute;
-  left: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
+  position: static !important;
+  transform: none !important;
   filter: invert(0.85);
   cursor: pointer;
-  width: 20px;
-  height: 20px;
-  opacity: 1 !important;
+  width: 18px;
+  height: 18px;
+  opacity: 0.85;
   display: block !important;
-  margin: 0 !important;
-  z-index: 2;
+  margin: 0 0 0 auto !important;
+  flex-shrink: 0 !important;
 }
 
 .date-range-wrap {
@@ -1080,6 +1091,50 @@ body.sidebar-collapsed .main-content {
   .main-content {
     padding: 0.75rem;
     padding-top: 4.5rem;
+  }
+}
+
+/* Mobile View Layout Fix for Pos Cards (Point 3) */
+@media (max-width: 640px) {
+  .pos-item {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.65rem !important;
+    padding: 0.85rem 1rem !important;
+  }
+
+  .pos-info {
+    width: 100% !important;
+  }
+
+  .pos-name {
+    font-size: 0.95rem !important;
+    line-height: 1.35 !important;
+    word-break: break-word !important;
+  }
+
+  .pos-detail {
+    font-size: 0.82rem !important;
+    margin-top: 0.2rem !important;
+  }
+
+  .pos-action-group {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    margin-top: 0.15rem !important;
+  }
+
+  .pos-dual-button {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+  }
+
+  .pos-dual-button .btn-seg-status,
+  .pos-dual-button .btn-seg-action {
+    flex: 1 !important;
+    text-align: center !important;
+    justify-content: center !important;
   }
 }
 
