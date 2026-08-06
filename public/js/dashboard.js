@@ -47,6 +47,26 @@ function setToday() {
 async function loadDashboardHarian() {
   ensureDefaultDates();
 
+  const gridEl = document.getElementById('kelompokGridDashboard') || document.getElementById('kelompokGrid');
+  const summaryEl = document.getElementById('summaryCards');
+
+  // Render shimmer skeleton cards immediately while fetching
+  if (summaryEl && (!summaryEl.children || summaryEl.children.length === 0)) {
+    summaryEl.innerHTML = `
+      <div class="kpi-card kpi-skeleton"></div>
+      <div class="kpi-card kpi-skeleton"></div>
+    `;
+  }
+  if (gridEl && (!gridEl.children || gridEl.children.length === 0)) {
+    gridEl.innerHTML = `
+      <div class="skeleton-grid-placeholder">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+      </div>
+    `;
+  }
+
   const input = document.getElementById('tanggalDashboard');
   const today = new Date().toISOString().split('T')[0];
   const tanggal = (input && input.value) ? input.value : today;

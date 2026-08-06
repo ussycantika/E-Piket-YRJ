@@ -451,6 +451,42 @@ body.sidebar-collapsed .main-content {
   font-weight: 500;
 }
 
+/* ---------- Skeleton Shimmer Loading Placeholder ---------- */
+@keyframes shimmerWave {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.kpi-skeleton,
+.skeleton-card {
+  min-height: 100px;
+  background: linear-gradient(
+    90deg,
+    rgba(13, 40, 30, 0.5) 25%,
+    rgba(22, 58, 44, 0.85) 50%,
+    rgba(13, 40, 30, 0.5) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmerWave 1.5s infinite;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.skeleton-grid-placeholder {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.skeleton-card {
+  min-height: 260px;
+}
+
 /* ---------- Summary Cards ---------- */
 .summary-cards {
   display: grid;
