@@ -1,7 +1,7 @@
 {
   "name": "e-piket",
   "version": "1.0.0",
-  "description": "Aplikasi Monitoring Pembiasaan Harian - Yayasan Raudhatul Jannah Cilegon",
+  "description": "Aplikasi Monitoring Pembiasaan Harian - SDIT Raudhatul Jannah Cilegon",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
