@@ -988,14 +988,22 @@ input[type="date"]::-webkit-calendar-picker-indicator,
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.14);
   color: var(--text-muted);
-  font-size: 1.15rem;
-  line-height: 1;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 1;
   transition: all 0.2s var(--ease);
-  margin-top: -2px;
+}
+
+.modal-close svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+  stroke-width: 2.5;
+  transition: transform 0.2s var(--ease);
 }
 
 .modal-close:hover {
