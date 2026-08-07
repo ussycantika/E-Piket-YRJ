@@ -1274,6 +1274,9 @@ select option {
     color: #C7E9C0 !important;
     font-weight: 600;
     white-space: nowrap;
+    max-width: 175px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     opacity: 1 !important;
   }
 
