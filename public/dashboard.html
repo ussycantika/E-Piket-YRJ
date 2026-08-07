@@ -62,7 +62,7 @@
         <div class="tab-header">
           <h1>Dashboard Harian</h1>
           <div class="date-picker-wrap">
-            <input type="date" id="tanggalDashboard" class="date-picker" onchange="loadDashboardHarian()">
+            <input type="date" id="tanggalDashboard" class="date-picker" onchange="loadDashboardHarian()" onclick="this.showPicker && this.showPicker()">
             <button class="btn btn-sm" onclick="setToday()">Hari ini</button>
           </div>
         </div>
@@ -85,11 +85,11 @@
           <div class="date-range-wrap">
             <div class="date-group">
               <label>Dari</label>
-              <input type="date" id="analitikDari" class="date-picker">
+              <input type="date" id="analitikDari" class="date-picker" onclick="this.showPicker && this.showPicker()">
             </div>
             <div class="date-group">
               <label>Sampai</label>
-              <input type="date" id="analitikSampai" class="date-picker">
+              <input type="date" id="analitikSampai" class="date-picker" onclick="this.showPicker && this.showPicker()">
             </div>
             <button class="btn btn-primary btn-sm" id="btnLoadAnalitik" onclick="loadAnalitik()">Terapkan</button>
           </div>
@@ -154,11 +154,11 @@
           <div class="export-filters">
             <div class="form-group">
               <label for="eksporDari">Tanggal Mulai</label>
-              <input type="date" id="eksporDari" class="date-picker">
+              <input type="date" id="eksporDari" class="date-picker" onclick="this.showPicker && this.showPicker()">
             </div>
             <div class="form-group">
               <label for="eksporSampai">Tanggal Akhir</label>
-              <input type="date" id="eksporSampai" class="date-picker">
+              <input type="date" id="eksporSampai" class="date-picker" onclick="this.showPicker && this.showPicker()">
             </div>
             <div class="form-group">
               <label for="eksporKelompok">Kelompok (opsional)</label>
