@@ -507,52 +507,15 @@ body.sidebar-collapsed .main-content {
   background: rgba(161, 217, 155, 0.12);
 }
 
-input[type="date"],
-.date-picker {
-  position: relative;
+.date-picker-wrap .custom-date-field {
+  flex: 1 1 auto;
+  min-width: 0;
   width: 100%;
-  padding: 0.75rem 1rem 0.75rem 2.75rem !important;
-  text-align: left !important;
-  direction: ltr !important;
-  box-sizing: border-box !important;
-  font-size: 0.9rem;
-  background: var(--bg-glass);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: all var(--duration) var(--ease);
 }
 
-.date-picker-wrap .date-picker {
-  width: auto;
-  min-width: 150px;
-  flex: 0 1 auto;
-}
-
-/* Chrome / Safari / Edge Mobile date text alignment fix */
-input[type="date"]::-webkit-date-and-time-value,
-.date-picker::-webkit-date-and-time-value {
-  text-align: left !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator,
-.date-picker::-webkit-calendar-picker-indicator {
-  position: absolute !important;
-  left: 0.85rem !important;
-  right: auto !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  filter: invert(0.85);
-  cursor: pointer;
-  width: 18px;
-  height: 18px;
-  opacity: 0.85;
-  display: block !important;
-  margin: 0 !important;
-  padding: 0 !important;
+.date-picker-wrap .custom-date-field input[type="date"],
+.date-picker-wrap .custom-date-field .date-picker {
+  width: 100%;
 }
 
 .date-range-wrap {

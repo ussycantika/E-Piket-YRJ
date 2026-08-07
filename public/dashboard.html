@@ -62,7 +62,12 @@
         <div class="tab-header">
           <h1>Dashboard Harian</h1>
           <div class="date-picker-wrap">
-            <input type="date" id="tanggalDashboard" class="date-picker" onchange="loadDashboardHarian()" onclick="this.showPicker && this.showPicker()">
+            <div class="custom-date-field">
+              <span class="custom-date-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              </span>
+              <input type="date" id="tanggalDashboard" class="date-picker" onchange="loadDashboardHarian()" onclick="this.showPicker && this.showPicker()">
+            </div>
             <button class="btn btn-sm" onclick="setToday()">Hari ini</button>
           </div>
         </div>
@@ -85,11 +90,21 @@
           <div class="date-range-wrap">
             <div class="date-group">
               <label>Dari</label>
-              <input type="date" id="analitikDari" class="date-picker" onclick="this.showPicker && this.showPicker()">
+              <div class="custom-date-field">
+                <span class="custom-date-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                </span>
+                <input type="date" id="analitikDari" class="date-picker" onclick="this.showPicker && this.showPicker()">
+              </div>
             </div>
             <div class="date-group">
               <label>Sampai</label>
-              <input type="date" id="analitikSampai" class="date-picker" onclick="this.showPicker && this.showPicker()">
+              <div class="custom-date-field">
+                <span class="custom-date-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                </span>
+                <input type="date" id="analitikSampai" class="date-picker" onclick="this.showPicker && this.showPicker()">
+              </div>
             </div>
             <button class="btn btn-primary btn-sm" id="btnLoadAnalitik" onclick="loadAnalitik()">Terapkan</button>
           </div>
@@ -154,11 +169,21 @@
           <div class="export-filters">
             <div class="form-group">
               <label for="eksporDari">Tanggal Mulai</label>
-              <input type="date" id="eksporDari" class="date-picker" onclick="this.showPicker && this.showPicker()">
+              <div class="custom-date-field">
+                <span class="custom-date-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                </span>
+                <input type="date" id="eksporDari" class="date-picker" onclick="this.showPicker && this.showPicker()">
+              </div>
             </div>
             <div class="form-group">
               <label for="eksporSampai">Tanggal Akhir</label>
-              <input type="date" id="eksporSampai" class="date-picker" onclick="this.showPicker && this.showPicker()">
+              <div class="custom-date-field">
+                <span class="custom-date-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                </span>
+                <input type="date" id="eksporSampai" class="date-picker" onclick="this.showPicker && this.showPicker()">
+              </div>
             </div>
             <div class="form-group">
               <label for="eksporKelompok">Kelompok (opsional)</label>
